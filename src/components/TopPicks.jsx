@@ -14,11 +14,29 @@ const TopPicks = () => {
 
 	const fetchRandomRecipes = numOfRecipes => {
 		// prettier-ignore
+		if(localStorage.getItem("topPicksData")){
+            setTopPicks( JSON.parse(localStorage.getItem("topPicksData")));
+			return;
+		}
+
 		Axios
             .get(`${baseURL}/recipes/random?apiKey=${apiKey}&number=${numOfRecipes}`)
            .then(({ data }) => {
-               setTopPicks(data.recipes);
-            });
+
+				const topPicksData = data.recipes.map(recipe => {
+				return {
+					id: recipe.id,
+					title:recipe.title,
+					image: recipe.image,
+					readyInMinutes: recipe.readyInMinutes,
+					summary:recipe.summary
+				};
+			});
+
+			localStorage.setItem("topPicksData",JSON.stringify( topPicksData))
+
+            setTopPicks( JSON.parse(localStorage.getItem("topPicksData")));
+        	});
 	};
 
 	return (
