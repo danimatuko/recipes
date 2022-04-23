@@ -1,41 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
-
-const meals = [
-	{
-		name: "Mushroom soup with buckwheat",
-		image: "https://www.themealdb.com/images/media/meals/1ngcbf1628770793.jpg",
-		gridClass: ""
-	},
-	{
-		name: "Big Mac ",
-		image: "https://www.themealdb.com/images/media/meals/urzj1d1587670726.jpg",
-		gridClass: "col-span-4 row-span-2"
-	},
-	{
-		name: "Pumpkin Pie",
-		image: "https://www.themealdb.com/images/media/meals/usuqtp1511385394.jpg",
-		gridClass: ""
-	},
-	{
-		name: "Mustard champ",
-		image: "https://www.themealdb.com/images/media/meals/o7p9581608589317.jpg",
-		gridClass: ""
-	},
-	{
-		name: "Spaghetti Bolognese",
-		image: "https://www.themealdb.com/images/media/meals/sutysw1468247559.jpg",
-		gridClass: ""
-	}
-];
+import Axios from "axios";
 
 const TopPicks = () => {
+	const [topPicks, setTopPicks] = useState(null);
+
+	useEffect(() => {
+		fetchRandomRecipes(5);
+	}, []);
+
+	const baseURL = "https://api.spoonacular.com";
+	const apiKey = process.env.REACT_APP_API_KEY;
+
+	const fetchRandomRecipes = numOfRecipes => {
+		// prettier-ignore
+		Axios
+            .get(`${baseURL}/recipes/random?apiKey=${apiKey}&number=${numOfRecipes}`)
+           .then(({ data }) => {
+               setTopPicks(data.recipes);
+			   console.log(data.recipes);
+            });
+	};
+
 	return (
-		<div className="grid grid-cols-8 grid-rows-2 gap-2" >
-			{meals.map((meal, index) => (
-					<Card meal={meal} key={index} id={index} />
-			))}
-		</div>
+		<section>
+			<h2 className="text-5xl w-fit mx-auto mb-16 pl-3 border-l-8 border-900">Top Picks</h2>
+			<div className="grid grid-cols-8 grid-rows-2 gap-2 lg:px-36">
+				{topPicks &&
+					topPicks.map((recipe, index) => {
+						if (index === 1) recipe.gridClass = "col-span-4 row-span-2";
+						return <Card recipe={recipe} key={recipe.id} id={recipe.id} />;
+					})}
+			</div>
+		</section>
 	);
 };
 

@@ -1,19 +1,35 @@
 import React from "react";
+import parse from "html-react-parser";
 
-const Card = ({ meal, id }) => {
+const Card = ({ recipe, id }) => {
 	return (
-		<div className={`col-span-2 ${meal.gridClass}`}>
+		<div className={`col-span-2 ${recipe.gridClass}`}>
 			<div className="mx-0 flex w-full h-full flex-col justify-center bg-white rounded-2xl shadow-xl shadow-slate-300/60">
 				<img
 					className="aspect-video  rounded-t-2xl object-cover object-center h-full"
-					src={meal.image}
+					src={recipe.image}
 				/>
 				<div className="p-4">
-					<small className="text-blue-400 text-xs">Automobile company</small>
-					<h1 className="text-2xl font-medium text-slate-600 pb-2">{meal.name}</h1>
-					<p className="text-sm tracking-tight font-light text-slate-400 leading-6">
-						Dodge is an American brand of automobiles and a division of Stellantis,
-						based in Auburn Hills, Michigan..
+					<small className="text-xs text-gray-500 font-bold pr-0.5">
+						{`${recipe.readyInMinutes} min`}
+					</small>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="w-4 inline"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="2"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+						/>
+					</svg>
+					<h1 className="text-2xl font-medium text-slate-600 pb-2 ">{recipe.title}</h1>
+					<p className="text-sm tracking-tight font-light text-slate-400 leading-6 h-12 text-ellipsis overflow-hidden">
+						{parse(`${recipe.summary}...`)}
 					</p>
 				</div>
 			</div>
