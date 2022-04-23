@@ -18,7 +18,6 @@ const TopPicks = () => {
             .get(`${baseURL}/recipes/random?apiKey=${apiKey}&number=${numOfRecipes}`)
            .then(({ data }) => {
                setTopPicks(data.recipes);
-			   console.log(data.recipes);
             });
 	};
 
