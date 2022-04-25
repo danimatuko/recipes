@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import VeganPreview from "./VeganPreview";
 
 export const RecipesByDiet = () => {
 	const baseURL = "https://api.spoonacular.com";
@@ -17,9 +18,7 @@ export const RecipesByDiet = () => {
 
 	return (
 		<section>
-			<h2 className="text-5xl w-fit mx-auto mb-16 pl-3 border-l-8 border-900 mt-16">
-				Recipes By Diet
-			</h2>
+			<VeganPreview />
 		</section>
 	);
 };

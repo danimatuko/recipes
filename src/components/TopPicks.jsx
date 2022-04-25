@@ -12,31 +12,30 @@ const TopPicks = () => {
 	const baseURL = "https://api.spoonacular.com";
 	const apiKey = process.env.REACT_APP_API_KEY;
 
-	const fetchRandomRecipes = numOfRecipes => {
+	const fetchRandomRecipes = (numOfRecipes) => {
 		// prettier-ignore
 		if(localStorage.getItem("topPicksData")){
             setTopPicks( JSON.parse(localStorage.getItem("topPicksData")));
 			return;
 		}
 
-		Axios
-            .get(`${baseURL}/recipes/random?apiKey=${apiKey}&number=${numOfRecipes}`)
-           .then(({ data }) => {
+		Axios.get(`${baseURL}/recipes/random?apiKey=${apiKey}&number=${numOfRecipes}`).then(
+			({ data }) => {
+				const topPicksData = data.recipes.map((recipe) => {
+					return {
+						id: recipe.id,
+						title: recipe.title,
+						image: recipe.image,
+						readyInMinutes: recipe.readyInMinutes,
+						summary: recipe.summary
+					};
+				});
 
-				const topPicksData = data.recipes.map(recipe => {
-				return {
-					id: recipe.id,
-					title:recipe.title,
-					image: recipe.image,
-					readyInMinutes: recipe.readyInMinutes,
-					summary:recipe.summary
-				};
-			});
+				localStorage.setItem("topPicksData", JSON.stringify(topPicksData));
 
-			localStorage.setItem("topPicksData",JSON.stringify( topPicksData))
-
-            setTopPicks( JSON.parse(localStorage.getItem("topPicksData")));
-        	});
+				setTopPicks(JSON.parse(localStorage.getItem("topPicksData")));
+			}
+		);
 	};
 
 	return (
@@ -46,7 +45,11 @@ const TopPicks = () => {
 				{topPicks &&
 					topPicks.map((recipe, index) => {
 						if (index === 1) recipe.gridClass = "col-span-4 row-span-2";
-						return <Card recipe={recipe} key={recipe.id} id={recipe.id} />;
+						return (
+							<div className={`col-span-2 ${recipe.gridClass} `}>
+								<Card recipe={recipe} key={recipe.id} id={recipe.id} />
+							</div>
+						);
 					})}
 			</div>
 		</section>
