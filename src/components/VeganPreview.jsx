@@ -4,7 +4,7 @@ import Card from "./Card";
 
 const VeganPreview = () => {
 	useEffect(() => {
-		fetchByDiet();
+	    fetchByDiet();
 	}, []);
 
 	const [recipes, setRecipes] = useState(null);
@@ -14,11 +14,12 @@ const VeganPreview = () => {
 
 	const fetchByDiet = () => {
 		// prettier-ignore
-		Axios
-            .get(`${baseURL}/recipes/complexSearch?apiKey=${apiKey}&diet=Vegan&addRecipeInformation=true&number=4`)
+            // .get(`${baseURL}/recipes/complexSearch?apiKey=${apiKey}&diet=Vegan&addRecipeInformation=true&number=4`)
+            Axios.get(`${baseURL}/recipes/random?apiKey=${apiKey}&number=${4}`)
+
            .then(({ data }) => {
-console.log(data.results);
-            setRecipes(data.results);
+console.log(data.recipes);
+            setRecipes(data.recipes);
          });
 	};
 

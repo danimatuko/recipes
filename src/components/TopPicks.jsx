@@ -44,10 +44,13 @@ const TopPicks = () => {
 			<div className="grid grid-cols-8 grid-rows-2 gap-2 lg:px-36">
 				{topPicks &&
 					topPicks.map((recipe, index) => {
-						if (index === 1) recipe.gridClass = "col-span-4 row-span-2";
+						recipe.gridClass =
+							index === 1
+								? (recipe.gridClass = "col-span-4 row-span-2")
+								: "col-span-2";
 						return (
-							<div className={`col-span-2 ${recipe.gridClass} `}>
-								<Card recipe={recipe} key={recipe.id} id={recipe.id} />
+							<div className={recipe.gridClass} key={recipe.id}>
+								<Card recipe={recipe} id={recipe.id} />
 							</div>
 						);
 					})}
