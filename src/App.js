@@ -7,6 +7,8 @@ import { RecipesByDiet } from "./components/RecipesByDiet";
 
 function App() {
 	const [topPicks, setTopPicks] = useState(null);
+	const DIET_TYPES = ["GlutenFree", "Vegetarian", "Vegan", "Ketogenic"];
+
 
 	useEffect(() => {
 		//	fetchRandomRecipes(5);

@@ -41,7 +41,7 @@ const TopPicks = () => {
 	return (
 		<section>
 			<h2 className="text-5xl w-fit mx-auto mb-16 pl-3 border-l-8 border-900">Top Picks</h2>
-			<div className="grid grid-cols-8 grid-rows-2 gap-2 lg:px-36">
+			<div className="grid grid-cols-8 grid-rows-2 gap-2">
 				{topPicks &&
 					topPicks.map((recipe, index) => {
 						recipe.gridClass =
