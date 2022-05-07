@@ -4,6 +4,7 @@ import TopPicks from "./components/TopPicks";
 import { useEffect, useState } from "react";
 import Hero from "./components/Hero";
 import { RecipesByDiet } from "./components/RecipesByDiet";
+import Newsletter from "./components/Newsletter";
 
 function App() {
 	const [topPicks, setTopPicks] = useState(null);
@@ -21,6 +22,7 @@ function App() {
 			<main className="container m-auto ">
 				<TopPicks />
 				<RecipesByDiet />
+				<Newsletter/>
 			</main>
 			<footer className=""></footer>
 		</div>

@@ -3,8 +3,10 @@ import parse from "html-react-parser";
 
 const Card = ({ recipe, id }) => {
 	return (
-		<div className="mx-0 flex w-full h-full flex-col justify-center bg-white rounded-2xl shadow-xl shadow-slate-300/60">
-			<img
+		<div
+			className="mx-0 flex w-full h-full flex-col justify-center bg-white rounded-2xl shadow-xl shadow-slate-300/60"
+		>
+			<img 
 				className="aspect-video  rounded-t-2xl object-cover object-center h-full overflow-hidden"
 				src={recipe.image}
 			/>
