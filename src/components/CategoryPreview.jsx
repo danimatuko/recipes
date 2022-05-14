@@ -28,7 +28,7 @@ const CategoryPreview = ({ category, numOfRecipes }) => {
   };
 
   return (
-    <section className="mb-20">
+    <section className="my-20">
       <h2 className="text-3xl mb-5 capitalize">{category}</h2>
       <div className="grid grid-cols-4 gap-4 h-96 justify-between">
         {recipes &&
